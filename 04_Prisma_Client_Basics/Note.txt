@@ -1,0 +1,6 @@
+=> so for client we have to add the client library
+    -> yarn add @prisma/client
+
+=> if you manually want to regenerate you client then:
+    -> npx prisma generate
+-> now from 'script.ts' we can access the prisma client
