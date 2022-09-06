@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// so now we will going to define the schema
+model User {
+  // User is the model 
+  // and in prisma inside model it should contain id
+
+  id   Int    @id @default(autoincrement())
+  // here we are defining id with integer and default value is autoincrement 
+  name String
+}
