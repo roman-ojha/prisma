@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  // generator is where you code is generated into
+  // so this file is a schema file
+  // so we will going to define code related to database into prisma format
+  // and when we will run the generator what are we goingto generate a code into son in this case we are generating this prisma-client-js
+  provider = "prisma-client-js"
+  // but if we are creating a graphQL api there is a different generator we can use that can generate graphQL api code for you automatically according to schema
+  // but for now we will use default generator
+}
+
+datasource db {
+  // datasource is the database that we are using for this project
+  provider = "postgresql"
+  // here provide is prostgresql
+  url      = env("DATABASE_URL")
+  // and the user is defined inside .env file
+}
+
+// so now we will going to define the schema
+model User {
+  // User is the model 
+  // and in prisma inside model it should contain id
+
+  id   Int    @id @default(autoincrement())
+  // here we are defining id with integer and default value is autoincrement 
+  name String
+}

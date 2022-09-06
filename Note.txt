@@ -1,5 +1,0 @@
-*) Setup:
-    -> npm init -y
-    -> yarn add -D prisma typescript ts-node @types/node nodemon
-    -> npx prisma init --datasource-provider postgresql
-        -> Provide the database that you are planning to use for this project we are using postgresql so we will use postgresql as datasource provider
