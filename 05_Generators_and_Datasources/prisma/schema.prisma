@@ -1,0 +1,17 @@
+generator client {
+  // you can have multiple generator
+  // like you can have generator for prisma client
+  // or you can have generator for graphQL apis
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // so you will have one only datasource that is directly connected to prisma
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id   Int    @id @default(autoincrement())
+  name String
+}
