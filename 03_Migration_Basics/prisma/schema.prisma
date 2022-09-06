@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id   Int    @id @default(autoincrement())
+  name String
+  // defining this model here we have not done anything into database
+  // because prisma and database are seperate from one another
+  // so just by defining into prisma it will not do anything into database
+  // so what we need to de is we need to migrate that prisma schema that we just update into real database
+  // so after migrate we have gerated a brand new prisma client and prisma client is from the generator
+  // so because we have added this 'User' model it means that client had added the code automatically for us that allow us to intaract with users, create them, update them, read them, delete them
+}

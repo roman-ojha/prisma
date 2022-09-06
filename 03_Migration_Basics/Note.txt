@@ -1,0 +1,12 @@
+=> To migrate:
+    -> npx prisma migrate <environment> --name <name_of_migration>
+        -> npx prisma migrate dev --name init
+            -> so here we are migrating schema for development environment and 'init' is the name of that migration
+    
+
+=> But to run the migration you need to define the path of the 'schema.prisma' file in this case it is not on the default path so we have to define it into package.js by default if you want to put that file into project root directory then you don't need to do this
+    ->   "prisma": {
+    "schema": "03_Migration_Basics/prisma/schema.prisma"
+  },
+    -> OR:
+        -> https://www.prisma.io/docs/concepts/components/prisma-schema#prisma-schema-file-location
