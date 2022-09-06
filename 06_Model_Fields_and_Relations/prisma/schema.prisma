@@ -14,9 +14,7 @@ model User {
   id          Int     @id @default(autoincrement())
   // @id: <attribute>
   name        String
-  email       String? @unique
-  // ? : Optional<Type_modifier>
-  // @unique: unique attribute
+  email       String?
   isAdmin     Boolean
   largeNumber BigInt
   preferences Json
@@ -40,11 +38,8 @@ model Post {
 
   // rating Float
   rating    Decimal
-  createdAt DateTime @default(now())
-  // and we can give 'createAt' field default data which it will get created
-
-  updateAt DateTime @updatedAt
-  // @updateAt attribute says every time we update this post this is automatically going to set this updated field as current datetime
+  createdAt DateTime
+  updateAt  DateTime
 
   // Relation Data
   author   User @relation(fields: [authorId], references: [id])

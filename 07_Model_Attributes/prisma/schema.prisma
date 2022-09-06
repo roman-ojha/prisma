@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Type of Attribute
+// 1) Field level attributes
+//  -> Field level attributes applies to the field
+// 2) Block level attributes
+
+model User {
+  id    String  @id @default(uuid())
+  // @id, @default are the field level attribute
+  age   Int
+  name  String
+  email String? @unique
+  // ? : Optional<Type_modifier>
+  // @unique: unique attribute
+  // isAdmin        Boolean
+
+  role Role @default(BASIC)
+  // now we can use role of type 'Role' because that we define as enum bellow
+
+  largeNumber    BigInt
+  blob           Unsupported("")
+  writtenPosts   Post[]          @relation("WrittenPosts")
+  favoritePosts  Post[]          @relation("FavoritePosts")
+  UserPreference UserPreference?
+
+  // Block level attributes 
+  // so we can create t ablock level attribute in uniqueness and we can say that inside this table we must have a uniqueness constraint on a age and name, so we could not have a two people have to same age and name
+  // so here we are saying that inside of our field we must have a age and name be unique, we can't have to same user have same age and same name
+  @@unique([age, name])
+  // and also we can have a index block level attribute 
+  // and we add add email as index which help for sorting
+  @@index([email])
+}
+
+model UserPreference {
+  id           String  @id @default(uuid())
+  emailUpdates Boolean
+  user         User    @relation(fields: [userId], references: [id])
+  userId       String  @unique
+}
+
+model Post {
+  id            String   @id @default(uuid())
+  title         String
+  averageRating Float
+  createdAt     DateTime @default(now())
+  // and we can give 'createAt' field default data which it will get created
+
+  updateAt      DateTime @updatedAt
+  // @updateAt attribute says every time we update this post this is automatically going to set this updated field as current datetime
+  author        User     @relation("WrittenPosts", fields: [authorId], references: [id])
+  authorId      String
+  favoritedBy   User?    @relation("FavoritePosts", fields: [favoritedById], references: [id])
+  favoritedById String?
+
+  categories Category[]
+
+  // in block level attribute we can create a composite id from multiple fields
+  // so here we are saying that 'title' and 'authorId' represent the id for the post
+  // @@id([title,authorId])
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+  post Post[]
+}
+
+// another type of Datasource Generator
+enum Role {
+  // so here we are add 'BASIC' and 'ADMIN' as Role which we can now add on model field as which role which user can have
+  BASIC
+  ADMIN
+  // EDITOR
+}
