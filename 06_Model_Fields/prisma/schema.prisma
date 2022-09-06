@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Model represent the table inside the database
+
+model User {
+  // <field_name> <Type_of_Field><type_modifer> <attribute>
+  id          Int     @id @default(autoincrement())
+  // @id: <attribute>
+  name        String
+  email       String? @unique
+  // ? : Optional<Type_modifier>
+  // @unique: unique attribute
+  isAdmin     Boolean
+  largeNumber BigInt
+  preferences Json
+  // postgres support Json datatype
+
+  // blob Bytes
+  // Bytes store byte information like files
+
+  blob Unsupported("")
+  // Prisma allow to take a database that already exist and convert it into schema file since prisma doesn't support every single type of data there is some datatype that is not supported
+
+  // Relation to Post Table
+  // and this is One to many relation where One User can have Multiple Post
+  post Post[]
+  // [] this is a field type modifier
+}
+
+model Post {
+  id String @id @default(uuid())
+  // uuid si the type of string which is little bit more secure
+
+  // rating Float
+  rating    Decimal
+  createdAt DateTime @default(now())
+  // and we can give 'createAt' field default data which it will get created
+
+  updateAt DateTime @updatedAt
+  // @updateAt attribute says every time we update this post this is automatically going to set this updated field as current datetime
+
+  // Relation Data
+  author   User @relation(fields: [authorId], references: [id])
+  // so here what field in this table is reference to the 'id' of the 'User' Table
+  authorId Int
+}
+
+model User2 {
+  id          Int     @id @default(autoincrement())
+  name        String
+  email       String? @unique
+  isAdmin     Boolean
+  largeNumber BigInt
+
+  blob Unsupported("")
+
+  // Disambiguating One to many relation ship
+  writtenPosts  Post2[] @relation("WrittenPosts")
+  // and now here we can target the field which is related to
+  favoritePosts Post2[] @relation("FavoritePosts")
+
+  UserPreference UserPreference?
+  // because this is and one to one relationship we will not add []
+}
+
+model UserPreference {
+  id           String  @id @default(uuid())
+  emailUpdates Boolean
+  // One to One Relationship
+  // So one User can have One Preferences
+  // so because this is a one to one relationship we can store the relationship in any one one of the table but we will store in UserPreference
+  user         User2   @relation(fields: [userId], references: [id])
+  userId       Int     @unique
+  // and because this is one to one relation 'userId' must be set as unique 
+}
+
+model Post2 {
+  id            String   @id @default(uuid())
+  rating        Decimal
+  createdAt     DateTime
+  updateAt      DateTime
+  // so here this would be ambiguous because of 'writtenPosts' & 'favoritePosts' are pointing to Post but first it don't know in which post it is pointing to like which Post is written and which post is faviorite Post so first we it don't know which Post field it should point into
+  writtenBy     User2    @relation("WrittenPosts", fields: [writtenById], references: [id])
+  // so to solve that we have to write Label to the relation
+  // so now after label we are saying that 'writtenPosts' is related to 'writtenBy' and 'writtenById'
+  // and 'favoritePosts' is related to 'favoriteBy' and 'favoriteById'
+  writtenById   Int
+  favoritedBy   User2?   @relation("FavoritePosts", fields: [favoritedById], references: [id])
+  favoritedById Int?
+
+  // Many to Many relationship
+  // So One catetory can have Multiple Posts and Post can have Multiple Different categories
+  categories Category[]
+  // so here we can say that we don't have to add any fancy @relation it just automatically knows that 'categories' is referencing to 'Category' model and the 'post' in 'Category' is referencing to 'Post2' model
+  // and prisma will automatically going to create join table for us between the two that will hook up with this relationship for us
+}
+
+model Category {
+  id   String  @id @default(uuid())
+  // it can have Multiple Post
+  post Post2[]
+}
