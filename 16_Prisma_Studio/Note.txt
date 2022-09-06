@@ -1,0 +1,4 @@
+=> to see Data in UI base interface we can use Prisma studio:
+    -> npx prisma studio
+    -> it will run prisma studio on browser on:
+        -> http://localhost:5555/
