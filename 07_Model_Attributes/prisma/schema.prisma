@@ -13,18 +13,14 @@ datasource db {
 // 2) Block level attributes
 
 model User {
-  id    String  @id @default(uuid())
+  id             String          @id @default(uuid())
   // @id, @default are the field level attribute
-  age   Int
-  name  String
-  email String? @unique
+  age            Int
+  name           String
+  email          String?         @unique
   // ? : Optional<Type_modifier>
   // @unique: unique attribute
-  // isAdmin        Boolean
-
-  role Role @default(BASIC)
-  // now we can use role of type 'Role' because that we define as enum bellow
-
+  isAdmin        Boolean
   largeNumber    BigInt
   blob           Unsupported("")
   writtenPosts   Post[]          @relation("WrittenPosts")
@@ -72,12 +68,4 @@ model Category {
   id   String @id @default(uuid())
   name String @unique
   post Post[]
-}
-
-// another type of Datasource Generator
-enum Role {
-  // so here we are add 'BASIC' and 'ADMIN' as Role which we can now add on model field as which role which user can have
-  BASIC
-  ADMIN
-  // EDITOR
 }

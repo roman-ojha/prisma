@@ -1,0 +1,2 @@
+=> now because we have every thing to setup now we can migrate the model:
+    -> npx prisma migrate dev
