@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd ts-node 13_Client_Update_Operations/script.ts",
-    "dev": "env-cmd nodemon 13_Client_Update_Operations/script.ts"
+    "start": "env-cmd ts-node 14_Connect_Existing_Relationship/script.ts",
+    "dev": "env-cmd nodemon 14_Connect_Existing_Relationship/script.ts"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/roman-ojha/prisma#readme",
   "prisma": {
-    "schema": "13_Client_Update_Operations/prisma/schema.prisma"
+    "schema": "14_Connect_Existing_Relationship/prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/node": "^18.7.15",
