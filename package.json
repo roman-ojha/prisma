@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd ts-node 10_Client_Read_Operations/script.ts",
-    "dev": "env-cmd nodemon 10_Client_Read_Operations/script.ts"
+    "start": "env-cmd ts-node 11_Advanced_Filtering/script.ts",
+    "dev": "env-cmd nodemon 11_Advanced_Filtering/script.ts"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/roman-ojha/prisma#readme",
   "prisma": {
-    "schema": "10_Client_Read_Operations/prisma/schema.prisma"
+    "schema": "11_Advanced_Filtering/prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/node": "^18.7.15",
