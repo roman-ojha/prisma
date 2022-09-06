@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd ts-node 08_Enum/script.ts",
-    "dev": "env-cmd nodemon 08_Enum/script.ts"
+    "start": "env-cmd ts-node 09_Client_Create_Operation/script.ts",
+    "dev": "env-cmd nodemon 09_Client_Create_Operation/script.ts"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/roman-ojha/prisma#readme",
   "prisma": {
-    "schema": "08_Enum/prisma/schema.prisma"
+    "schema": "09_Client_Create_Operation/prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/node": "^18.7.15",

@@ -1,2 +1,5 @@
 => now because we have every thing to setup now we can migrate the model:
     -> npx prisma migrate dev
+
+=> and if you are not getting auto suggestion inside of prisma client then it means that prisma did not generate all the change that we have did
+    -> npx prisma generate
