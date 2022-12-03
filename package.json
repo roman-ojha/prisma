@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "env-cmd ts-node 16_Prisma_Studio/script.ts",
-    "dev": "env-cmd nodemon 16_Prisma_Studio/script.ts"
+    "dev": "env-cmd nodemon 16_Prisma_Studio/script.ts",
+    "seed": "ts-node prisma/seed.ts"
   },
   "repository": {
     "type": "git",
