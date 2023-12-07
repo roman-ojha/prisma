@@ -1,0 +1,5 @@
+npx prisma migrate dev --name <migration_name>
+npx prisma studio (run prisma studio)
+npx prisma migrate deploy (deploy the migrated files on database)
+npx prisma generate (generate prisma client)
+npx prisma validate (to validate is prisma model is correct or not)
