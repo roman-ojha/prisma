@@ -1,4 +1,5 @@
 npx prisma migrate dev --name <migration_name>
+npx prisma migrate dev --schema <prisma_schema_file_path> --name <migration_name>
 npx prisma studio (run prisma studio)
 npx prisma migrate deploy (deploy the migrated files on database)
 npx prisma generate (generate prisma client)
